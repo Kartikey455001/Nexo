@@ -1,0 +1,19 @@
+# Environment files and local credentials
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+noxa-d35cc-firebase-adminsdk-fbsvc-b975f28c13.json
+
+# Dependencies and generated output
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.next/
+**/.next/
+.turbo/
+coverage/
+*.tsbuildinfo
