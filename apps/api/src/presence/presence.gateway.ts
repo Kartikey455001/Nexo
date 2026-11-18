@@ -48,7 +48,7 @@ export class PresenceGateway implements OnGatewayConnection, OnGatewayDisconnect
         select: { chatId: true },
       });
 
-      userChats.forEach(chat => {
+      userChats.forEach((chat: any) => {
         client.join(`chat:${chat.chatId}`);
       });
       

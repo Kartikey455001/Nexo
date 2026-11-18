@@ -29,7 +29,7 @@ export class AiController {
       include: { sender: { select: { profile: { select: { username: true } } } } },
     });
 
-    return messages.reverse().map((m) => ({
+    return messages.reverse().map((m: any) => ({
       sender: m.sender?.profile?.username || 'User',
       content: m.content || '',
     }));

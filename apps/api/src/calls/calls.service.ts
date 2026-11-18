@@ -47,7 +47,7 @@ export class CallsService {
         initiatorId,
         status: 'ONGOING',
         participants: {
-          create: chat.members.map((m) => ({
+          create: chat.members.map((m: any) => ({
             userId: m.userId,
             joinedAt: m.userId === initiatorId ? new Date() : undefined, // others haven't joined yet
           })),
@@ -67,7 +67,7 @@ export class CallsService {
 
     if (!call) throw new NotFoundException('Call not found');
 
-    const isParticipant = call.participants.some(p => p.userId === userId);
+    const isParticipant = call.participants.some((p: any) => p.userId === userId);
     if (!isParticipant) throw new ForbiddenException('Not a participant');
 
     return this.prisma.call.update({

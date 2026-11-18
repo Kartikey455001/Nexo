@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { randomBytes, randomUUID, createHash } from 'node:crypto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma.service';
@@ -48,7 +48,7 @@ export class AuthService {
 
     const passwordHash = await bcrypt.hash(password, 12);
     try {
-      return await this.prisma.$transaction(async (tx) => {
+      return await this.prisma.$transaction(async (tx: any) => {
         const user = await tx.user.create({
           data: {
             email: normalizedEmail,
@@ -99,7 +99,7 @@ export class AuthService {
       throw new UnauthorizedException('Email or password is incorrect');
     }
 
-    const session = await this.prisma.$transaction((tx) =>
+    const session = await this.prisma.$transaction((tx: any) =>
       this.createDeviceSession(tx, user.id, device),
     );
 
@@ -197,7 +197,7 @@ export class AuthService {
     return this.jwtService.sign({ userId, deviceId, sessionId });
   }
 
-  private publicUser(user: User & { profile?: any | null }) {
+  private publicUser(user: any) {
     return {
       id: user.id,
       userId: user.id,
